@@ -8,7 +8,7 @@ import 'chat_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  //gettin chat and auth services
+  //getting chat and auth services
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
@@ -28,39 +28,55 @@ class HomePage extends StatelessWidget {
 
   Widget _buildUserList() {
     return StreamBuilder(
-        stream: _chatService.getUsersStream(),
-        builder: (context, snapshot) {
-          //error
-          if (snapshot.hasError) {
-            return Text("Error");
-          }
-          //loading
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading..");
-          }
-          //return full list view
-          return ListView(
-            children: snapshot.data!
-                .map<Widget>(
-                    (userData) => _buildUserListItem(userData, context))
-                .toList(),
-          );
-        });
+      stream: _chatService.getUsersStream(),
+      builder: (context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+        print("Snapshot state: ${snapshot.connectionState}");
+        if (snapshot.hasError) {
+          print("Error: ${snapshot.error}");
+          return Text("Error: ${snapshot.error}");
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          print("Loading...");
+          return Text("Loading..");
+        }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          print("No users found.");
+          return Text("No users found.");
+        }
+
+        // Display the users
+        return ListView(
+          children: snapshot.data!
+              .map<Widget>((userData) => _buildUserListItem(userData, context))
+              .toList(),
+        );
+      },
+    );
   }
 
-  Widget _buildUserListItem(
-      Map<String, dynamic> userData, BuildContext context) {
-    //display all users
-    if (userData["email"] != _authService.getCurrentUser()!.email) {
+  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
+    // Check for null values and provide default values if necessary
+    final String? email = userData["email"];
+    final String? uid = userData["uid"];
+
+    // Debug prints
+    print("User Data: $userData");
+    if (email == null || uid == null) {
+      print("Error: User data is missing required fields.");
+      return Container();
+    }
+
+    // Display all users except the current user
+    if (email != _authService.getCurrentUser()!.email) {
       return UserTile(
-          text: userData["email"],
+          text: email,
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ChatPage(
-                  receiveremail: userData["email"],
-                  receiverID: userData["uid"],
+                  receiveremail: email,
+                  receiverID: uid,
                 ),
               ),
             );
