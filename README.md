@@ -11,16 +11,16 @@ Here it's a chat app made with firebase & firestore.
 ## Screenshots
 
 <div align="center">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/signup.png" width="300">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/chat%20app.png" width="300">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/dark%20mode%20log%20in.png" width="300">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/signup.png" width="200">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/chat%20app.png" width="200">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/dark%20mode%20log%20in.png" width="200">
 
   <!-- Add more images in similar fashion -->
 </div>
 <div align="center">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/home%20page.png" width="300">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/side%20drawer.png" width="300">
-  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/setting%20page.png" width="300">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/home%20page.png" width="200">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/side%20drawer.png" width="200">
+  <img src="https://github.com/Yashprajapati01/Chatter/blob/master/setting%20page.png" width="200">
 
   <!-- Add more images in similar fashion -->
 </div>
